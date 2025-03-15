@@ -16,6 +16,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/docker/data
-/docker/dump
+/docker/database
 /docker/logs
