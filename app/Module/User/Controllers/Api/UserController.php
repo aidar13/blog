@@ -81,6 +81,6 @@ final class UserController extends Controller
     public function me(): ProfileResource
     {
         return (new ProfileResource($this->service->getById(Auth::id())))
-            ->setMessage(trans('message.user.me'));
+            ->setMessage('User information retrieved successfully');
     }
 }
