@@ -55,7 +55,7 @@ final class AuthController extends Controller
      */
     public function login(LoginRequest $request): LoginResource
     {
-        $tokenDTO = dispatch_sync(new LoginCommand(
+        $tokenDTO = $this->dispatch(new LoginCommand(
             $request->getDTO()
         ));
 
@@ -94,7 +94,7 @@ final class AuthController extends Controller
      */
     public function register(RegisterRequest $request): MessagesResource
     {
-        dispatch_sync(new RegisterCommand(
+        $this->dispatch(new RegisterCommand(
             $request->getDTO()
         ));
 
@@ -126,7 +126,7 @@ final class AuthController extends Controller
      */
     public function logout(): MessagesResource
     {
-        dispatch(new LogoutCommand(
+        $this->dispatch(new LogoutCommand(
             (int)Auth::id()
         ));
 
@@ -165,7 +165,7 @@ final class AuthController extends Controller
      */
     public function forgotPassword(ForgotPasswordRequest $request): MessagesResource
     {
-        $success = dispatch_sync(new ForgotPasswordCommand(
+        $success = $this->dispatch(new ForgotPasswordCommand(
             $request->getDTO()
         ));
 
@@ -205,7 +205,7 @@ final class AuthController extends Controller
      */
     public function resetPassword(ResetPasswordRequest $request): MessagesResource
     {
-        $success = dispatch_sync(new ResetPasswordCommand(
+        $success = $this->dispatch(new ResetPasswordCommand(
             $request->getDTO()
         ));
 
