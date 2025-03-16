@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec9d82bab99971a68c23fb7fa35b45b5",
+    "content-hash": "0504ce44cc0a8eb2f548b32e8918f5be",
     "packages": [
         {
             "name": "brick/math",
@@ -6628,6 +6628,53 @@
                 "source": "https://github.com/laravel/sail"
             },
             "time": "2025-01-24T15:45:36+00:00"
+        },
+        {
+            "name": "ludovicose/generator",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ludovicose/generator.git",
+                "reference": "97fd2aa530530176acf47c7c1221824a85ad660b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ludovicose/generator/zipball/97fd2aa530530176acf47c7c1221824a85ad660b",
+                "reference": "97fd2aa530530176acf47c7c1221824a85ad660b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ludovicose\\Generator\\Providers\\CodeGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ludovicose\\Generator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aibek Muratbekov",
+                    "email": "aibek.muratbekov@gmail.com"
+                }
+            ],
+            "description": "Code generator",
+            "support": {
+                "issues": "https://github.com/ludovicose/generator/issues",
+                "source": "https://github.com/ludovicose/generator/tree/2.0.0"
+            },
+            "time": "2022-09-07T06:12:43+00:00"
         },
         {
             "name": "mockery/mockery",
