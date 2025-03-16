@@ -7,18 +7,21 @@ namespace App\Module\Post\Providers;
 use App\Module\Post\Commands\CreatePostCommand;
 use App\Module\Post\Commands\RemovePostCommand;
 use App\Module\Post\Commands\UpdatePostCommand;
+use App\Module\Post\Commands\UpdatePostStatusCommand;
 use App\Module\Post\Handlers\CreatePostHandler;
 use App\Module\Post\Handlers\RemovePostHandler;
 use App\Module\Post\Handlers\UpdatePostHandler;
+use App\Module\Post\Handlers\UpdatePostStatusHandler;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\ServiceProvider;
 
 class CommandBusServiceProviders extends ServiceProvider
 {
     private array $maps = [
-        CreatePostCommand::class => CreatePostHandler::class,
-        UpdatePostCommand::class => UpdatePostHandler::class,
-        RemovePostCommand::class => RemovePostHandler::class,
+        CreatePostCommand::class       => CreatePostHandler::class,
+        UpdatePostCommand::class       => UpdatePostHandler::class,
+        RemovePostCommand::class       => RemovePostHandler::class,
+        UpdatePostStatusCommand::class => UpdatePostStatusHandler::class,
     ];
 
     public function boot(): void
