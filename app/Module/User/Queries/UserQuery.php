@@ -28,4 +28,10 @@ final class UserQuery implements UserQueryContract, PaginationUserQuery
             })
             ->paginate($DTO->limit, ['*'], 'page', $DTO->page);
     }
+
+    public function getByEmail(string $email): User
+    {
+        /** @var User */
+        return User::query()->where('email', $email)->firstOrFail();
+    }
 }

@@ -9,4 +9,6 @@ use App\Models\User;
 interface UserQuery
 {
     public function getById(int $id): User;
+
+    public function getByEmail(string $email): User;
 }
