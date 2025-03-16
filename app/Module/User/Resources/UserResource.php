@@ -20,6 +20,11 @@ use Illuminate\Http\Request;
  *         type="string",
  *         example="Name"
  *     ),
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         example="email"
+ *     ),
  * )
  * @property-read User $resource
  */
@@ -34,8 +39,9 @@ final class UserResource extends BaseJsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'   => $this->resource->id,
-            'name' => $this->resource->name,
+            'id'    => $this->resource->id,
+            'name'  => $this->resource->name,
+            'email' => $this->resource->email,
         ];
     }
 }
