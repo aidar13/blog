@@ -1,0 +1,371 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API BLOG",
+        "description": "API BLOG",
+        "contact": {
+            "email": "support@example.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Получение токена",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/LoginResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register",
+                "operationId": "Register",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Register success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Register success"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "logout",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "Logout success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logout success"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Список пользователей",
+                "operationId": "usersIndex",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/__page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/__limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/__sort"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Имя сотрудника",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Хаким"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            }
+        },
+        "/me": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Получение данные пользователя",
+                "operationId": "me",
+                "responses": {
+                    "200": {
+                        "description": "Информация пользователя получен.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/ProfileResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "LoginRequest": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "email",
+                        "type": "email",
+                        "example": "email"
+                    },
+                    "password": {
+                        "description": "password",
+                        "type": "string",
+                        "example": "password"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterRequest": {
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "name",
+                        "type": "string",
+                        "example": "name"
+                    },
+                    "email": {
+                        "description": "email",
+                        "type": "email",
+                        "example": "email"
+                    },
+                    "password": {
+                        "description": "password",
+                        "type": "string",
+                        "example": "password"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginResource": {
+                "properties": {
+                    "userId": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "token": {
+                        "type": "string",
+                        "example": "email@gmail.com"
+                    }
+                },
+                "type": "object"
+            },
+            "ProfileResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "email@gmail.com"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Name"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "__id": {
+                "name": "id",
+                "in": "path",
+                "description": "ID сущности",
+                "schema": {
+                    "type": "integer",
+                    "default": 1
+                }
+            },
+            "__page": {
+                "name": "page",
+                "in": "query",
+                "description": "Номер страницы",
+                "required": false,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "__limit": {
+                "name": "limit",
+                "in": "query",
+                "description": "Количество данных для показа",
+                "required": false,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "__sort": {
+                "name": "sort",
+                "in": "query",
+                "description": "Сортировка",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "User",
+            "description": "User"
+        }
+    ]
+}
