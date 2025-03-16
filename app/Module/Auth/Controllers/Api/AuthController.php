@@ -10,6 +10,7 @@ use App\Module\Auth\Commands\ForgotPasswordCommand;
 use App\Module\Auth\Commands\LoginCommand;
 use App\Module\Auth\Commands\LogoutCommand;
 use App\Module\Auth\Commands\RegisterCommand;
+use App\Module\Auth\Commands\ResetPasswordCommand;
 use App\Module\Auth\Requests\ForgotPasswordRequest;
 use App\Module\Auth\Requests\LoginRequest;
 use App\Module\Auth\Requests\RegisterRequest;
