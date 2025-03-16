@@ -165,12 +165,13 @@ final class AuthController extends Controller
      */
     public function forgotPassword(ForgotPasswordRequest $request): MessagesResource
     {
-        $tokenDTO = dispatch_sync(new ForgotPasswordCommand(
+        $success = dispatch_sync(new ForgotPasswordCommand(
             $request->getDTO()
         ));
 
         return (new MessagesResource(null))
-            ->setMessage('Forgot password success');
+            ->setStatusCode($success ? 200 : 400)
+            ->setMessage($success ? 'Forgot password success' : 'Forgot password error' );
     }
 
     /**
@@ -204,11 +205,12 @@ final class AuthController extends Controller
      */
     public function resetPassword(ResetPasswordRequest $request): MessagesResource
     {
-        dispatch_sync(new ResetPasswordCommand(
+        $success = dispatch_sync(new ResetPasswordCommand(
             $request->getDTO()
         ));
 
         return (new MessagesResource(null))
-            ->setMessage('Reset password success');
+            ->setStatusCode($success ? 200 : 400)
+            ->setMessage($success ? 'Reset password success' : 'Reset password error' );
     }
 }

@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace App\Module\Auth\DTO;
 
 use App\Module\Auth\Requests\ResetPasswordRequest;
+use App\Traits\ToArrayTrait;
 
 final class ResetPasswordDTO
 {
+    use ToArrayTrait;
+
     public string $email;
     public string $token;
     public string $password;

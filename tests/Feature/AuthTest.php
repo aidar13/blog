@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
@@ -44,7 +46,7 @@ class AuthTest extends TestCase
         $response = $this->postJson(route('api.register'), [
             'name'     => $user->name,
             'email'    => $user->email,
-            'password' => $this->faker->password,
+            'password' => $this->faker->password(8),
         ]);
 
         $response->assertOk()
@@ -69,5 +71,43 @@ class AuthTest extends TestCase
 
         $response->assertOk()
             ->assertJson(['message' => 'Logout success']);
+    }
+
+    public function testForgotPassword()
+    {
+        Mail::fake();
+
+        /** @var User $user */
+        $user = User::factory()->create();
+
+        $response = $this->postJson(route('password.forgot'), [
+            'email' => $user->email,
+        ]);
+
+        $response
+            ->assertStatus(200)
+            ->assertJson(['message' => 'Forgot password success']);
+    }
+
+    public function testResetPassword()
+    {
+        Mail::fake();
+
+        /** @var User $user */
+        $user = User::factory()->create();
+
+        $token = Password::createToken($user);
+
+        $response = $this->postJson(route('password.reset'), [
+            'email'    => $user->email,
+            'token'    => $token,
+            'password' => 'newpassword',
+        ]);
+
+        $response
+            ->assertStatus(200)
+            ->assertJson(['message' => 'Reset password success']);
+
+        $this->assertTrue(Hash::check('newpassword', $user->fresh()->password));
     }
 }
