@@ -108,7 +108,7 @@ class PostTest extends TestCase
             'title'          => $model->title,
             'content'        => $model->content,
             'status'         => $model->status,
-            'authorId'       => $model->author_id,
+            'author_id'      => $model->author_id,
             'featured_image' => $model->featured_image
         ]);
     }
