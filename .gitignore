@@ -19,3 +19,4 @@ yarn-error.log
 /docker/database
 /docker/logs
 /resources/views/vendor/l5-swagger
+.phpunit.result.cache
