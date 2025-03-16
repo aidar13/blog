@@ -1,6 +1,7 @@
 <?php
 
 use App\Module\Auth\Controllers\Api\AuthController;
+use App\Module\Post\Controllers\Api\PostsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
 
+     Route::get('/posts', [PostsController::class, 'index'])
+        ->name('posts.index');
+     Route::get('/posts/{id}', [PostsController::class, 'show'])
+        ->name('posts.show');
+     Route::post('/posts', [PostsController::class, 'store'])
+        ->name('posts.store');
+     Route::put('/posts/{id}', [PostsController::class, 'update'])
+        ->name('posts.update');
+    Route::delete('/posts/{id}', [PostsController::class, 'destroy'])
+        ->name('posts.delete');
 });

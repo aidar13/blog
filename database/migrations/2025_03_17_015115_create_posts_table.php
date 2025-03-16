@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('featured_image')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
 
