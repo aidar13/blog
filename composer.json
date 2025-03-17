@@ -22,7 +22,8 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.12",
         "phpunit/phpunit": "^10.0",
-        "spatie/laravel-ignition": "^2.0"
+        "spatie/laravel-ignition": "^2.0",
+        "vimeo/psalm": "^6.5"
     },
     "autoload": {
         "psr-4": {
