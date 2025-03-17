@@ -146,6 +146,408 @@
                 ]
             }
         },
+        "/password/forgot": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Forgot password",
+                "operationId": "ForgotPassword",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ForgotPasswordRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Forgot password success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Forgot password success"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            }
+        },
+        "/password/reset": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Reset password",
+                "operationId": "ResetPassword",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetPasswordRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Reset password success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Reset password success"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            }
+        },
+        "/post": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Список",
+                "description": "Получить список",
+                "operationId": "64267d01d64c3def182b6bdd951a1dd3",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Номер страницы",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Количество данных для показа",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/PostResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Cоздать",
+                "description": "Cоздать",
+                "operationId": "eb2768786f306f22dea2d462d1aff1ba",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePostRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Post created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Post created successfully"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            }
+        },
+        "/post/{id}": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Получить данные по id",
+                "description": "Получить данные по id",
+                "operationId": "f67bcacbafc6f9512a7374f3ef6eac2f",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/__id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/PostItemResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Редактировать",
+                "description": "Редактировать",
+                "operationId": "dac5d47fd6947fc40e2f8ab4165fadf7",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/__id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePostRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Post updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Post updated successfully"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Удалить",
+                "description": "Удалить",
+                "operationId": "7fb9527c7de4cea6760513a003c0edb3",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/__id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Post deleted successfully"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            }
+        },
+        "/post/{id}/publish": {
+            "put": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Публиковать",
+                "description": "Публиковать",
+                "operationId": "31b7f5fc5af1d333d2d004cae0c7eb74",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/__id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post published successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Post updated successfully"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ]
+            }
+        },
         "/users": {
             "get": {
                 "tags": [
@@ -231,6 +633,19 @@
     },
     "components": {
         "schemas": {
+            "ForgotPasswordRequest": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "email",
+                        "type": "email",
+                        "example": "email"
+                    }
+                },
+                "type": "object"
+            },
             "LoginRequest": {
                 "required": [
                     "email",
@@ -275,6 +690,31 @@
                 },
                 "type": "object"
             },
+            "ResetPasswordRequest": {
+                "required": [
+                    "email",
+                    "token",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "email",
+                        "type": "email",
+                        "example": "email"
+                    },
+                    "token": {
+                        "description": "token",
+                        "type": "string",
+                        "example": "token"
+                    },
+                    "password": {
+                        "description": "password",
+                        "type": "string",
+                        "example": "password"
+                    }
+                },
+                "type": "object"
+            },
             "LoginResource": {
                 "properties": {
                     "userId": {
@@ -284,6 +724,200 @@
                     "token": {
                         "type": "string",
                         "example": "email@gmail.com"
+                    }
+                },
+                "type": "object"
+            },
+            "CreatePostRequest": {
+                "required": [
+                    "authorId",
+                    "title",
+                    "content",
+                    "status"
+                ],
+                "properties": {
+                    "authorId": {
+                        "description": "ID of the author",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "My Blog Post"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "This is the content of the post."
+                    },
+                    "status": {
+                        "description": "1 - draft, 2 - published",
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            2
+                        ],
+                        "example": 1
+                    },
+                    "featuredImage": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "https://example.com/image.jpg",
+                        "nullable": true
+                    },
+                    "categoryIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "nullable": true
+                    },
+                    "tagIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": 5
+                        },
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatePostRequest": {
+                "required": [
+                    "title",
+                    "content",
+                    "status"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "My Blog Post"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "This is the content of the post."
+                    },
+                    "status": {
+                        "description": "1 - draft, 2 - published",
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            2
+                        ],
+                        "example": 1
+                    },
+                    "featuredImage": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "https://example.com/image.jpg",
+                        "nullable": true
+                    },
+                    "categoryIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "nullable": true
+                    },
+                    "tagIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": 5
+                        },
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "CategoryResource": {
+                "properties": {
+                    "id": {
+                        "description": "id",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PostItemResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "title"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "content"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "featuredImage": {
+                        "type": "integer",
+                        "example": "featuredImage"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "example": "2025-01-01 00:01"
+                    },
+                    "author": {
+                        "$ref": "#/components/schemas/UserResource"
+                    },
+                    "tags": {
+                        "$ref": "#/components/schemas/TagResource"
+                    },
+                    "categories": {
+                        "$ref": "#/components/schemas/CategoryResource"
+                    }
+                },
+                "type": "object"
+            },
+            "PostResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "title"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "example": "2025-01-01 00:01"
+                    },
+                    "author": {
+                        "$ref": "#/components/schemas/UserResource"
+                    }
+                },
+                "type": "object"
+            },
+            "TagResource": {
+                "properties": {
+                    "id": {
+                        "description": "id",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "name",
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -314,6 +948,10 @@
                     "name": {
                         "type": "string",
                         "example": "Name"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "email"
                     }
                 },
                 "type": "object"
@@ -362,6 +1000,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Post",
+            "description": "Post"
         },
         {
             "name": "User",
