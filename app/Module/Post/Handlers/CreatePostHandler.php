@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Module\Post\Handlers;
 
 use App\Module\Post\Commands\CreatePostCommand;
+use App\Module\Post\Commands\SyncPostTagsCommand;
+use App\Module\Post\Commands\SyncPostCategoriesCommand;
 use App\Module\Post\Contracts\Repositories\CreatePostRepository;
 use App\Module\Post\Models\Post;
 
@@ -23,5 +25,8 @@ final class CreatePostHandler
         $model->status         = $command->DTO->status;
         $model->featured_image = $command->DTO->featuredImage;
         $this->repository->create($model);
+
+        dispatch_sync(new SyncPostTagsCommand($model, $command->DTO->tagIds));
+        dispatch_sync(new SyncPostCategoriesCommand($model, $command->DTO->categoryIds));
     }
 }
