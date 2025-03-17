@@ -37,7 +37,7 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v3
         with:
-          composer-options: "--no-dev --optimize-autoloader"
+          composer-options: "--no-interaction --prefer-dist"
 
       - name: Set environment variables
         run: |
@@ -54,7 +54,8 @@ jobs:
         run: php artisan migrate --force
 
       - name: Run tests
-        run: vendor/bin/phpunit --stop-on-failure
+#        run: vendor/bin/phpunit --stop-on-failure
+        run: php artisan test --stop-on-failure
 
   swagger-validation:
     runs-on: ubuntu-latest
