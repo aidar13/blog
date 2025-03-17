@@ -54,16 +54,37 @@ jobs:
         run: php artisan migrate --force
 
       - name: Run tests
-#        run: vendor/bin/phpunit --stop-on-failure
         run: php artisan test --stop-on-failure
 
-  swagger-validation:
+  swagger-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Validate OpenAPI/Swagger
-        uses: char0n/swagger-editor-validate-action@v1
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
         with:
-          definition-file: "docs/swagger.yaml"
+          php-version: 8.2
+          extensions: mbstring, pdo, pdo_mysql, bcmath
+          coverage: none
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v3
+        with:
+          composer-options: "--no-interaction --prefer-dist"
+
+      - name: Generate Swagger Docs
+        run: php artisan l5-swagger:generate
+
+#
+#  swagger-validation:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4
+#
+#      - name: Validate OpenAPI/Swagger
+#        uses: char0n/swagger-editor-validate-action@v1
+#        with:
+#          definition-file: "docs/swagger.yaml"
