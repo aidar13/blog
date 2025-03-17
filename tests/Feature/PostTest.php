@@ -4,7 +4,9 @@ namespace Tests\Feature;
 
 use App\Http\Permissions\PermissionList;
 use App\Models\User;
+use App\Module\Post\Models\Category;
 use App\Module\Post\Models\Post;
+use App\Module\Post\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -105,14 +107,17 @@ class PostTest extends TestCase
         /** @var Post $model */
         $model = Post::factory()->make();
 
+        $categories = Category::factory()->count(5)->create();
+        $tags       = Tag::factory()->count(5)->create();
+
         $data = [
             'title'         => $model->title,
             'content'       => $model->content,
             'status'        => $model->status,
             'authorId'      => $model->author_id,
             'featuredImage' => $model->featured_image,
-            'categoryIds'   => [],
-            'tagIds'        => []
+            'categoryIds'   => $categories->pluck('id')->toArray(),
+            'tagIds'        => $tags->pluck('id')->toArray()
         ];
 
         $response = $this
@@ -134,9 +139,24 @@ class PostTest extends TestCase
             'author_id'      => $model->author_id,
             'featured_image' => $model->featured_image
         ]);
+
+        /** @var Tag $tag */
+        foreach ($tags as $tag) {
+            $this->assertDatabaseHas('posts_tags', [
+                'tag_id' => $tag->id,
+            ]);
+        }
+
+        /** @var Category $category */
+        foreach ($categories as $category) {
+            $this->assertDatabaseHas('posts_categories', [
+                'category_id' => $category->id,
+            ]);
+        }
     }
 
-    public function testUpdatePost()
+    public
+    function testUpdatePost()
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -146,13 +166,16 @@ class PostTest extends TestCase
         /** @var Post $model */
         $model = Post::factory()->make();
 
+        $categories = Category::factory(5)->create();
+        $tags       = Tag::factory(5)->create();
+
         $data = [
             'title'         => $model->title,
             'content'       => $model->content,
             'status'        => $model->status,
             'featuredImage' => $model->featured_image,
-            'categoryIds'   => [],
-            'tagIds'        => []
+            'categoryIds'   => $categories->pluck('id')->toArray(),
+            'tagIds'        => $tags->pluck('id')->toArray()
         ];
 
         $response = $this
@@ -174,9 +197,24 @@ class PostTest extends TestCase
             'status'         => $model->status,
             'featured_image' => $model->featured_image
         ]);
+
+        /** @var Tag $tag */
+        foreach ($tags as $tag) {
+            $this->assertDatabaseHas('posts_tags', [
+                'tag_id' => $tag->id,
+            ]);
+        }
+
+        /** @var Category $category */
+        foreach ($categories as $category) {
+            $this->assertDatabaseHas('posts_categories', [
+                'category_id' => $category->id,
+            ]);
+        }
     }
 
-    public function testDeletePost()
+    public
+    function testDeletePost()
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -196,7 +234,8 @@ class PostTest extends TestCase
             ]);
     }
 
-    public function testPublishPost()
+    public
+    function testPublishPost()
     {
         /** @var User $user */
         $user = User::factory()->create();
