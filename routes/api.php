@@ -2,6 +2,7 @@
 
 use App\Module\Auth\Controllers\Api\AuthController;
 use App\Module\Post\Controllers\Api\PostsController;
+use App\Module\User\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,4 +49,12 @@ Route::middleware('auth:sanctum')->group(function () {
         ->name('posts.publish');
     Route::delete('/posts/{id}', [PostsController::class, 'destroy'])
         ->name('posts.delete');
+
+
+    // User
+    Route::get('me', [UserController::class, 'me'])
+        ->name('me');
+
+    Route::get('users', [UserController::class, 'index'])
+        ->name('users.index');
 });
