@@ -55,7 +55,7 @@ final class AuthController extends Controller
      */
     public function login(LoginRequest $request): LoginResource
     {
-        $tokenDTO = $this->dispatch(new LoginCommand(
+        $tokenDTO = $this->dispatchSync(new LoginCommand(
             $request->getDTO()
         ));
 
@@ -94,7 +94,7 @@ final class AuthController extends Controller
      */
     public function register(RegisterRequest $request): MessagesResource
     {
-        $this->dispatch(new RegisterCommand(
+        $this->dispatchSync(new RegisterCommand(
             $request->getDTO()
         ));
 
