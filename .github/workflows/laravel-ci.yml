@@ -56,6 +56,9 @@ jobs:
       - name: Run tests
         run: php artisan test --stop-on-failure
 
+      - name: Run Psalm
+        run: vendor/bin/psalm --no-progress
+
   swagger-check:
     runs-on: ubuntu-latest
     steps:
